@@ -1,8 +1,25 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
+import gspread
+from google.oauth2.service_account import Credentials
 
 # Configuração da página
 st.set_page_config(page_title="Menu Superior", layout="wide")
+
+# Configurar autenticação com Google Sheets
+def connect_to_gsheets():
+    credentials = Credentials.from_service_account_info(
+        st.secrets["google_service_account"]
+    )
+    client = gspread.authorize(credentials)
+    # Abra a planilha pelo nome ou URL
+    sheet = client.open("Cadastramento").sheet1
+    return sheet
+
+# Função para salvar dados na planilha
+def save_to_gsheet(data):
+    sheet = connect_to_gsheets()
+    sheet.append_row(data)
 
 # Barra de navegação
 selected = option_menu(
@@ -20,23 +37,7 @@ selected = option_menu(
 )
 
 # Conteúdo da aba selecionada
-if selected == "Categorias":
-    st.title("Categorias")
-    st.write("Conteúdo da aba Categorias.")
-
-elif selected == "Ofertas":
-    st.title("Ofertas")
-    st.write("Conteúdo da aba Ofertas.")
-
-elif selected == "Cupons":
-    st.title("Cupons")
-    st.write("Conteúdo da aba Cupons.")
-
-elif selected == "Mercado Play":
-    st.title("Mercado Play")
-    st.write("Conteúdo da aba Mercado Play.")
-
-elif selected == "Cadastro":
+if selected == "Cadastro":
     st.title("Cadastro")
 
     # Campos do formulário
@@ -53,14 +54,13 @@ elif selected == "Cadastro":
     if submit_button:
         if nome and email and telefone and senha:  # Verifica se todos os campos estão preenchidos
             st.success(f"Cadastro realizado com sucesso!\nBem-vindo, {nome}!")
-            # Aqui você pode salvar os dados em uma lista, arquivo ou banco de dados
-            # Exemplo simples: Salvar os dados localmente
-            cadastro = {"Nome": nome, "Email": email, "Telefone": telefone, "Senha": senha}
-            st.write("Dados cadastrados:")
-            st.json(cadastro)
+
+            # Dados para salvar na planilha
+            data = [nome, email, telefone, senha]
+            try:
+                save_to_gsheet(data)
+                st.success("Dados enviados para o Google Sheets!")
+            except Exception as e:
+                st.error(f"Erro ao salvar os dados: {e}")
         else:
             st.error("Por favor, preencha todos os campos.")
-
-elif selected == "Contato":
-    st.title("Contato")
-    st.write("Conteúdo da aba Contato.")
