@@ -1,8 +1,8 @@
 import streamlit as st
 import openai
 
-# Configure sua chave da API OpenAI
-openai.api_key = "SUA_API_OPENAI"
+# Configurar a API Key usando secrets
+openai.api_key = st.secrets["openai"]["api_key"]
 
 # Configurando a interface
 st.title("Chatbot com Streamlit")
