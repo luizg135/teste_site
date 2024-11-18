@@ -13,7 +13,7 @@ selected = option_menu(
     default_index=0,  # Aba inicial
     orientation="horizontal",  # Orientação horizontal
     styles={
-        "container": {"padding": "0!important", "background-color": "#FFD700"},
+        "container": {"padding": "0!important", "background-color": "#47A09C"},
         "nav-link": {"font-size": "16px", "color": "black", "font-weight": "bold", "text-align": "center"},
         "nav-link-selected": {"background-color": "#FFFFFF", "color": "#000000"},
     },
