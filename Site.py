@@ -22,14 +22,13 @@ if st.button("Enviar") and user_input.strip():
 
     # Gera resposta do chatbot
     response = openai.ChatCompletion.create(
-    model="gpt-3.5-turbo",  # Confirme se está usando um modelo suportado
-    messages=[
-        {"role": "system", "content": "Você é um assistente útil."},
-        {"role": "user", "content": user_input},
-    ],
-)
-bot_response = response['choices'][0]['message']['content']
+        model="gpt-3.5-turbo",
+        messages=st.session_state.messages
+    )
+    bot_response = response['choices'][0]['message']['content']
 
+    # Adiciona resposta ao histórico
+    st.session_state.messages.append({"role": "assistant", "content": bot_response})
 
     # Adiciona resposta ao histórico
     st.session_state.messages.append({"role": "assistant", "content": bot_response})
