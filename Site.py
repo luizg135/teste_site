@@ -21,11 +21,11 @@ if st.button("Enviar") and user_input.strip():
 
     # Obter resposta da API
     try:
-        response = openai.chat_completions.create(
+        response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",  # ou "gpt-4" se disponível
             messages=st.session_state.messages
         )
-        bot_response = response.choices[0].message.content
+        bot_response = response["choices"][0]["message"]["content"]
 
         # Adicionar resposta ao histórico
         st.session_state.messages.append({"role": "assistant", "content": bot_response})
