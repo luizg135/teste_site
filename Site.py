@@ -38,7 +38,7 @@ elif selected == "Moda":
 elif selected == "Mercado Play":
     st.title("Mercado Play")
     st.write("Conteúdo da aba Mercado Play.")
-elif selected == "Vender":
+elif selected == "Cadastro":
     st.title("Cadastro")
     st.write("Conteúdo da aba Cadastro.")
 elif selected == "Contato":
