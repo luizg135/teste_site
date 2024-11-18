@@ -19,28 +19,48 @@ selected = option_menu(
     },
 )
 
-# Exibindo o conteúdo de acordo com a aba selecionada
+# Conteúdo da aba selecionada
 if selected == "Categorias":
     st.title("Categorias")
     st.write("Conteúdo da aba Categorias.")
+
 elif selected == "Ofertas":
     st.title("Ofertas")
     st.write("Conteúdo da aba Ofertas.")
+
 elif selected == "Cupons":
     st.title("Cupons")
     st.write("Conteúdo da aba Cupons.")
-elif selected == "Supermercado":
-    st.title("Supermercado")
-    st.write("Conteúdo da aba Supermercado.")
-elif selected == "Moda":
-    st.title("Moda")
-    st.write("Conteúdo da aba Moda.")
+
 elif selected == "Mercado Play":
     st.title("Mercado Play")
     st.write("Conteúdo da aba Mercado Play.")
+
 elif selected == "Cadastro":
     st.title("Cadastro")
-    st.write("Conteúdo da aba Cadastro.")
+
+    # Campos do formulário
+    with st.form("form_cadastro"):
+        nome = st.text_input("Nome Completo")
+        email = st.text_input("Email")
+        telefone = st.text_input("Telefone")
+        senha = st.text_input("Senha", type="password")
+
+        # Botão de submissão
+        submit_button = st.form_submit_button("Cadastrar")
+
+    # Ação ao clicar no botão
+    if submit_button:
+        if nome and email and telefone and senha:  # Verifica se todos os campos estão preenchidos
+            st.success(f"Cadastro realizado com sucesso!\nBem-vindo, {nome}!")
+            # Aqui você pode salvar os dados em uma lista, arquivo ou banco de dados
+            # Exemplo simples: Salvar os dados localmente
+            cadastro = {"Nome": nome, "Email": email, "Telefone": telefone, "Senha": senha}
+            st.write("Dados cadastrados:")
+            st.json(cadastro)
+        else:
+            st.error("Por favor, preencha todos os campos.")
+
 elif selected == "Contato":
     st.title("Contato")
     st.write("Conteúdo da aba Contato.")
