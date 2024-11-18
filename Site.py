@@ -19,6 +19,20 @@ selected = option_menu(
     },
 )
 
+# Adiciona estilos CSS personalizados para alinhar o formulário
+st.markdown(
+    """
+    <style>
+        .form-container {
+            max-width: 800px; /* Largura máxima do formulário */
+            margin: 0 auto; /* Centraliza horizontalmente */
+            padding-top: 20px; /* Distância do topo */
+        }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
 # Conteúdo da aba selecionada
 if selected == "Categorias":
     st.title("Categorias")
@@ -39,22 +53,23 @@ elif selected == "Mercado Play":
 elif selected == "Cadastro":
     st.title("Cadastro")
 
-    # Campos do formulário
-    with st.form("form_cadastro"):
-        nome = st.text_input("Nome Completo")
-        email = st.text_input("Email")
-        telefone = st.text_input("Telefone")
-        senha = st.text_input("Senha", type="password")
+    # Formulário com alinhamento
+    with st.container():
+        st.markdown('<div class="form-container">', unsafe_allow_html=True)
+        with st.form("form_cadastro"):
+            nome = st.text_input("Nome Completo")
+            email = st.text_input("Email")
+            telefone = st.text_input("Telefone")
+            senha = st.text_input("Senha", type="password")
 
-        # Botão de submissão
-        submit_button = st.form_submit_button("Cadastrar")
+            # Botão de submissão
+            submit_button = st.form_submit_button("Cadastrar")
+        st.markdown('</div>', unsafe_allow_html=True)
 
     # Ação ao clicar no botão
     if submit_button:
         if nome and email and telefone and senha:  # Verifica se todos os campos estão preenchidos
             st.success(f"Cadastro realizado com sucesso!\nBem-vindo, {nome}!")
-            # Aqui você pode salvar os dados em uma lista, arquivo ou banco de dados
-            # Exemplo simples: Salvar os dados localmente
             cadastro = {"Nome": nome, "Email": email, "Telefone": telefone, "Senha": senha}
             st.write("Dados cadastrados:")
             st.json(cadastro)
