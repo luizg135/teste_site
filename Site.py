@@ -39,8 +39,8 @@ elif selected == "Mercado Play":
     st.title("Mercado Play")
     st.write("Conteúdo da aba Mercado Play.")
 elif selected == "Vender":
-    st.title("Vender")
-    st.write("Conteúdo da aba Vender.")
+    st.title("Cadastro")
+    st.write("Conteúdo da aba Cadastro.")
 elif selected == "Contato":
     st.title("Contato")
     st.write("Conteúdo da aba Contato.")
