@@ -7,8 +7,8 @@ st.set_page_config(page_title="Menu Superior", layout="wide")
 # Barra de navegação
 selected = option_menu(
     menu_title=None,  # Ocultar título do menu
-    options=["Categorias", "Ofertas", "Cupons", "Supermercado", "Moda", "Mercado Play", "Vender", "Contato"],
-    icons=["list", "tag", "ticket", "shop", "tshirt", "play-circle", "cash", "envelope"],  # Ícones opcionais
+    options=["Categorias", "Ofertas", "Cupons", "Mercado Play", "Vender", "Contato"],
+    icons=["list", "tag", "ticket", "play-circle", "cash", "envelope"],  # Ícones opcionais
     menu_icon="menu",  # Ícone do menu
     default_index=0,  # Aba inicial
     orientation="horizontal",  # Orientação horizontal
